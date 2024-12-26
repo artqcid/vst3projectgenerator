@@ -4,9 +4,11 @@
 
 #include "@SMTG_PREFIX_FOR_FILENAMES@controller.h"
 #include "@SMTG_PREFIX_FOR_FILENAMES@cids.h"
+#include "Sub@SMTG_PREFIX_FOR_FILENAMES@Controller"
 @SMTG_INCLUDE_VSTGUI_HEADER_CODE_SNIPPET@
 
 using namespace Steinberg;
+using namespace Vst;
 
 namespace @SMTG_VENDOR_NAMESPACE@ {
 
@@ -25,7 +27,10 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Controller::initialize (FUnknown* con
 	}
 
 	// Here you could register some parameters
-
+	/** Just example Parameters
+	parameters.addParameter(STR16("cGain"), STR16("dB"), 0, .5, ParameterInfo::kCanAutomate, kCGainId, 0);
+	parameters.addParameter(STR("Bypass"), nullptr, 1, 0.,ParameterInfo::kCanAutomate | ParameterInfo::kIsBypass,kBypassId);
+	**/
 	return result;
 }
 
@@ -98,6 +103,22 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Controller::getParamValueByString (Vs
 	// called by host to get a normalized value from a string representation of a specific parameter
 	// (without having to set the value!)
 	return EditControllerEx1::getParamValueByString (tag, string, valueNormalized);
+}
+
+//------------------------------------------z------------------------------
+/** TODO: EXAMPLE SUBCONTROLLER-
+/** to make this work you have to add a CViewControl in the GUI
+/** and add the "subGainController" String as Subcontroller Tag
+/** TODO: We should use the enum in the Cid File for this instead of 
+/** Hardcoding **/
+IController* StrangeGaterController::createSubController(
+	UTF8StringPtr name, const IUIDescription* /*description*/, VST3Editor* editor)
+{
+	if (UTF8StringView(name) == "subGainController")
+	{
+		return new Sub@SMTG_PLUGIN_CLASS_NAME@Controller(editor);
+	}
+	return nullptr;
 }
 
 //------------------------------------------------------------------------

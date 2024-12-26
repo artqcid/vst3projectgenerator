@@ -22,7 +22,7 @@ class Sub@SMTG_PLUGIN_CLASS_NAME@Controller : public FObject, public DelegationC
 public:
 //------------------------------------------------------------------------
 	Sub@SMTG_PLUGIN_CLASS_NAME@Controller(VST3Editor* baseController) : DelegationController(baseController)
-		/** Just an example with an CTextLabel and CKnob Gain Parameter
+		/** TODO: EXAMPLE with an CTextLabel and CKnob Gain Parameter
 		,cGain(nullptr)
 		,lGainValue(nullptr)
 		**/
@@ -49,7 +49,7 @@ protected:
 
 private:
 //------------------------------------------------------------------------
-	/** Just an example with an CTextLabel and CKnob Gain Parameter 
+	/** TODO: EXAMPLE with an CTextLabel and CKnob Gain Parameter 
 	CKnob* cGain;
 	CTextLabel* lGainValue;
 	**/

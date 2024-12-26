@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 
 #include "Sub@SMTG_PLUGIN_CLASS_NAME@Controller.h"
-#include "PlugInCids.h"
+#include "@SMTG_PLUGIN_CLASS_NAME@Cids.h"
 #include "public.sdk/source/vst/utility/stringconvert.h"
 #include <iostream>
 #include <string>
@@ -21,7 +21,7 @@ using namespace @SMTG_VENDOR_NAMESPACE@;
 //------------------------------------------------------------------------
 Sub@SMTG_PLUGIN_CLASS_NAME@Controller::~Sub@SMTG_PLUGIN_CLASS_NAME@Controller()
 {
-	/** Just an example with an Gain Parameter
+	/** TODO: Just an example with an Gain Parameter
 	if (cGain) {
 		cGain->unregisterControlListener(this);
 		cGain->forget();
@@ -43,7 +43,7 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
                                                  const VSTGUI::UIAttributes& attributes,
                                                  const VSTGUI::IUIDescription* description)
 {
-	/** Just an example with an Gain Parameter
+	/** TODO: EXAMPLE with an Gain Parameter
 	if (auto control = dynamic_cast<CKnob*>(view); control && control->getTag() == kCGainId)
 	{
 		cGain = control;
@@ -56,7 +56,7 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
 	}
 	**/
 
-	/** Just an example with an CTextLabel 
+	/** TODO: EXAMPLE with an CTextLabel 
 	if (auto control = dynamic_cast<CTextLabel*>(view); control && control->getTag() == kLGainValueId)
 	{
 		lGainValue = control;
@@ -82,7 +82,7 @@ void Sub@SMTG_PLUGIN_CLASS_NAME@Controller::valueChanged (VSTGUI::CControl* pCon
 	if (!pControl)
 		return controller->valueChanged(pControl);
 
-	/** Just an example with an CTextLabel 
+	/** TODO: EXAMPLE with an CTextLabel 
 	//Check GainKnob Change and set it Parameter and to GainLabel
 	if (pControl->getTag() == kCGainId) 
 	{
@@ -116,6 +116,7 @@ void Sub@SMTG_PLUGIN_CLASS_NAME@Controller::controlEndEdit (VSTGUI::CControl* pC
 }
 
 //------------------------------------------------------------------------
+// TODO: EXAMPLE This Method takes a normalized float Value and convert it to a String
 // This Method takes a normalized float Value and convert it to a String
 // because we dont want a 0.0 - 1.0 representation we multiply with 100
 // (From 0.4678904 we got to 46.78904)

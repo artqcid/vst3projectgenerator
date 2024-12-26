@@ -4,6 +4,9 @@
 
 #pragma once
 
+namespace Steinberg {
+namespace Vst {
+
 #include "public.sdk/source/vst/vsteditcontroller.h"
 
 namespace @SMTG_VENDOR_NAMESPACE@ {
@@ -12,11 +15,20 @@ namespace @SMTG_VENDOR_NAMESPACE@ {
 //  @SMTG_PLUGIN_CLASS_NAME@Controller
 //------------------------------------------------------------------------
 class @SMTG_PLUGIN_CLASS_NAME@Controller : public Steinberg::Vst::EditControllerEx1
+										   public VSTGUI::VST3EditorDelegate
 {
 public:
 //------------------------------------------------------------------------
 	@SMTG_PLUGIN_CLASS_NAME@Controller () = default;
 	~@SMTG_PLUGIN_CLASS_NAME@Controller () SMTG_OVERRIDE = default;
+
+	using UTF8StringPtr = VSTGUI::UTF8StringPtr;
+	using IController = VSTGUI::IController;
+	using IUIDescription = VSTGUI::IUIDescription;
+	using VST3Editor = VSTGUI::VST3Editor;
+
+	StrangeGaterController () = default;
+	~StrangeGaterController () SMTG_OVERRIDE = default;
 
     // Create function
 	static Steinberg::FUnknown* createInstance (void* /*context*/)
@@ -49,9 +61,16 @@ public:
 	END_DEFINE_INTERFACES (EditController)
     DELEGATE_REFCOUNT (EditController)
 
+	// SUBCONTROLLER EXAMPLE - 
+	// create the Subcontroller is called from Gui if a SubcontrollerTag on a Control is defined
+	IController* createSubController(UTF8StringPtr name, const IUIDescription* description,
+	VST3Editor* editor) override;
+
 //------------------------------------------------------------------------
 protected:
 };
 
 //------------------------------------------------------------------------
 } // namespace @SMTG_VENDOR_NAMESPACE@
+} // namespace Vst
+} // namespace Steinberg
