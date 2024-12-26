@@ -4,10 +4,10 @@
 
 #pragma once
 
+#include "public.sdk/source/vst/vsteditcontroller.h"
+
 namespace Steinberg {
 namespace Vst {
-
-#include "public.sdk/source/vst/vsteditcontroller.h"
 
 namespace @SMTG_VENDOR_NAMESPACE@ {
 

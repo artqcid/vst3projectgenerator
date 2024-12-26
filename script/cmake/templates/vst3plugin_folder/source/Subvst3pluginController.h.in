@@ -28,7 +28,7 @@ public:
 		**/
 	{
 	};
-	virtual ~SubGainController();
+	virtual ~Sub@SMTG_PLUGIN_CLASS_NAME@Controller();
 
 	IControlListener* getControlListener() { return this; }
 
