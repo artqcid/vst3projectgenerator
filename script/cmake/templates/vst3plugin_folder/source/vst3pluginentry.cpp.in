@@ -51,3 +51,4 @@ BEGIN_FACTORY_DEF ("@SMTG_VENDOR_NAME@",
 	//----for others Plug-ins contained in this factory, put like for the first Plug-in different DEF_CLASS2---
 
 END_FACTORY
+
