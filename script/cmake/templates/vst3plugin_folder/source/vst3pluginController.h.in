@@ -70,5 +70,5 @@ protected:
 };
 
 //------------------------------------------------------------------------
-} // namespace @SMTG_VENDOR_NAMESPACE@
+} // namespace @SMTG_VENDOR_NAMESPACE@ 
 

@@ -4,7 +4,7 @@
 
 #include "@SMTG_PREFIX_FOR_FILENAMES@Controller.h"
 #include "@SMTG_PREFIX_FOR_FILENAMES@Cids.h"
-#include "Sub@SMTG_PREFIX_FOR_FILENAMES@Controller"
+#include "Sub@SMTG_PREFIX_FOR_FILENAMES@Controller.h"
 #include "vstgui/plugin-bindings/vst3editor.h"
 @SMTG_INCLUDE_VSTGUI_HEADER_CODE_SNIPPET@
 

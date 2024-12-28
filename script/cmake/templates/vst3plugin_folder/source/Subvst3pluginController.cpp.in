@@ -60,7 +60,7 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
 	if (auto control = dynamic_cast<CTextLabel*>(view); control && control->getTag() == kLGainValueId)
 	{
 		lGainValue = control;
-		lGainValue->setValueToStringFunction(valueToString);
+		lGainValue->setValueToStringFunction(normalizedValueToZeroToHundredString);
 		
 		//lGainValue->setPrecision(1);
 		//lGainValue->setText(std::to_string(cGain->getValue() * 100).c_str());
