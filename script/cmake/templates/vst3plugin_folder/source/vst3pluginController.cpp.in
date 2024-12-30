@@ -29,10 +29,8 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Controller::initialize (FUnknown* con
 	}
 
 	// Here you could register some parameters
-	/** TODO: EXAMPLE Parameters
-	parameters.addParameter(STR16("cGain"), STR16("dB"), 0, .5, ParameterInfo::kCanAutomate, kCGainId, 0);
-	**/
 
+	parameters.addParameter(STR16("cGain"), STR16("dB"), 0, .5, ParameterInfo::kCanAutomate, kCGainId, 0);
 	parameters.addParameter(STR("Bypass"), nullptr, 1, 0.,ParameterInfo::kCanAutomate | ParameterInfo::kIsBypass,kBypassId);
 
 	return result;

@@ -21,7 +21,7 @@ using namespace @SMTG_VENDOR_NAMESPACE@;
 //------------------------------------------------------------------------
 Sub@SMTG_PLUGIN_CLASS_NAME@Controller::~Sub@SMTG_PLUGIN_CLASS_NAME@Controller()
 {
-	/** TODO: Just an example with an Gain Parameter
+
 	if (cGain) {
 		cGain->unregisterControlListener(this);
 		cGain->forget();
@@ -29,7 +29,7 @@ Sub@SMTG_PLUGIN_CLASS_NAME@Controller::~Sub@SMTG_PLUGIN_CLASS_NAME@Controller()
 
 	}
 	lGainValue = nullptr;
-	**/
+
 }
 
 //------------------------------------------------------------------------
@@ -43,7 +43,7 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
                                                  const VSTGUI::UIAttributes& attributes,
                                                  const VSTGUI::IUIDescription* description)
 {
-	/** TODO: EXAMPLE with an Gain Parameter
+
 	if (auto control = dynamic_cast<CKnob*>(view); control && control->getTag() == kCGainId)
 	{
 		cGain = control;
@@ -54,9 +54,9 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
 		//now we set also the parameter value from the Knob control value
 
 	}
-	**/
 
-	/** TODO: EXAMPLE with an CTextLabel 
+
+
 	if (auto control = dynamic_cast<CTextLabel*>(view); control && control->getTag() == kLGainValueId)
 	{
 		lGainValue = control;
@@ -69,7 +69,7 @@ VSTGUI::CView* Sub@SMTG_PLUGIN_CLASS_NAME@Controller::verifyView (VSTGUI::CView*
 		lGainValue->valueChanged();
 		lGainValue->setDirty();
 	}
-	**/
+	
 	
 	// Always return to base class because we dont wont loose the parameter Binding
 	return controller->verifyView(view, attributes, description);
@@ -82,7 +82,7 @@ void Sub@SMTG_PLUGIN_CLASS_NAME@Controller::valueChanged (VSTGUI::CControl* pCon
 	if (!pControl)
 		return controller->valueChanged(pControl);
 
-	/** TODO: EXAMPLE with an CTextLabel 
+
 	//Check GainKnob Change and set it Parameter and to GainLabel
 	if (pControl->getTag() == kCGainId) 
 	{
@@ -95,7 +95,7 @@ void Sub@SMTG_PLUGIN_CLASS_NAME@Controller::valueChanged (VSTGUI::CControl* pCon
 		// Always return to base class because we dont wont loose the parameter Binding
 		return controller->valueChanged(pControl);
 	}
-	**/
+
 
 }
 
