@@ -60,6 +60,8 @@ protected:
 	ParamValue mGain;
 	bool mBypass;
 	void doParameterHandling(ProcessData& data);
+
+	template <SymbolicSampleSizes SampleSize>
 	void doAudioProcessing(ProcessData& data);
 };
 

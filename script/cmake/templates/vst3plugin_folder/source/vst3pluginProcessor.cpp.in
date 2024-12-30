@@ -5,9 +5,10 @@
 #include "@SMTG_PREFIX_FOR_FILENAMES@Processor.h"
 #include "@SMTG_PREFIX_FOR_FILENAMES@Cids.h"
 
+#include "public.sdk/source/vst/utility/audiobuffers.h"
+#include "public.sdk/source/vst/vstaudioprocessoralgo.h"
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/vst/ivstparameterchanges.h"
-#include "public.sdk/source/vst/vstaudioprocessoralgo.h"
 
 using namespace Steinberg;
 using namespace Vst;
@@ -86,47 +87,45 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::process (Vst::ProcessData&
 		return kResultOk;
 	}
 
-	doAudioProcessing(data);
+	if (processSetup.symbolicSampleSize == SymbolicSampleSizes::kSample64)
+	{
+		doAudioProcessing<SymbolicSampleSizes::kSample64>(data);
+	}
+	else
+	{
+		doAudioProcessing<SymbolicSampleSizes::kSample32>(data);
+	}
 
 	return kResultOk;
 }
 
+//-----------------------------------------------------------------------------------
+template <SymbolicSampleSizes SampleSize>
 void @SMTG_PLUGIN_CLASS_NAME@Processor::doAudioProcessing(ProcessData& data)
 {
 	auto inputs = data.inputs;
+	auto outputs = data.outputs;
 
-	if (processSetup.symbolicSampleSize == SymbolicSampleSizes::kSample64) {
-		for (auto channelIndex = 0; channelIndex < inputs[0].numChannels; ++channelIndex)
+	// 64bit Processing -----------------------------------------------------------------
+
+	for (auto channelIndex = 0; channelIndex < inputs[0].numChannels; ++channelIndex)
+	{
+		auto inChannelBuffer = getChannelBuffers<SampleSize>(inputs[0])[channelIndex];
+		auto outChannelBuffer = getChannelBuffers<SampleSize>(outputs[0])[channelIndex];
+
+		for (auto sampleIndex = 0; sampleIndex < data.numSamples; ++sampleIndex)
 		{
-			auto inChannelBuffer = data.inputs[0].channelBuffers64[channelIndex];
-			auto outChannelBuffer = data.outputs[0].channelBuffers64[channelIndex];
-
-			for (auto sampleIndex = 0; sampleIndex < data.numSamples; ++sampleIndex)
-			{
-				if (mBypass = true) {
-					outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];
-				}
-				outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex] * mGain;
+			if (mBypass = true) {
+				outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];
 			}
-		}
-	}
-	else {
-		for (auto channelIndex = 0; channelIndex < inputs[0].numChannels; ++channelIndex)
-		{
-			auto inChannelBuffer = data.inputs[0].channelBuffers32[channelIndex];
-			auto outChannelBuffer = data.outputs[0].channelBuffers32[channelIndex];
-
-			for (auto sampleIndex = 0; sampleIndex < data.numSamples; ++sampleIndex)
-			{
-				if (mBypass = true) {
-					outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];
-				}
-				outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex] * mGain;
-			}
+			outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex] * mGain;
 		}
 	}
 }
+template void TestProjectProcessor::doAudioProcessing<kSample32>(ProcessData& data);
+template void TestProjectProcessor::doAudioProcessing<kSample64>(ProcessData& data);
 
+//-----------------------------------------------------------------------------------
 void @SMTG_PLUGIN_CLASS_NAME@Processor::doParameterHandling(Steinberg::Vst::ProcessData& data)
 {
 	int32 numParamsChanged = data.inputParameterChanges->getParameterCount();
