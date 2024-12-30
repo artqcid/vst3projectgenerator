@@ -59,6 +59,8 @@ public:
 protected:
 	ParamValue mGain;
 	bool mBypass;
+	void doParameterHandling(ProcessData& data);
+	void doAudioProcessing(ProcessData& data);
 };
 
 //------------------------------------------------------------------------

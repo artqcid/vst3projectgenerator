@@ -70,31 +70,7 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::process (Vst::ProcessData&
 
 	if (data.inputParameterChanges)
 	{
-		int32 numParamsChanged = data.inputParameterChanges->getParameterCount();
-		for (int32 index = 0; index < numParamsChanged; index++)
-		{
-			if (IParamValueQueue* paramQueue = data.inputParameterChanges->getParameterData(index))
-			{
-				ParamValue value;
-				int32 sampleOffset;
-				int32 numPoints = paramQueue->getPointCount();
-				switch (paramQueue->getParameterId())
-				{
-				case kCGainId:
-					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-						kResultTrue)
-						mGain = value;
-					break;
-				case kBypassId:
-					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-						kResultTrue)
-					{
-						mBypass = (value > 0.5f);
-					}
-					break;
-				}
-			}
-		}
+		doParameterHandling(data);
 	}
 	
 	//--- Here you have to implement your processing
@@ -110,6 +86,13 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::process (Vst::ProcessData&
 		return kResultOk;
 	}
 
+	doAudioProcessing(data);
+
+	return kResultOk;
+}
+
+void @SMTG_PLUGIN_CLASS_NAME@Processor::doAudioProcessing(ProcessData& data)
+{
 	auto inputs = data.inputs;
 
 	if (processSetup.symbolicSampleSize == SymbolicSampleSizes::kSample64) {
@@ -136,14 +119,41 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::process (Vst::ProcessData&
 			for (auto sampleIndex = 0; sampleIndex < data.numSamples; ++sampleIndex)
 			{
 				if (mBypass = true) {
-					outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];	
+					outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];
 				}
 				outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex] * mGain;
 			}
 		}
 	}
+}
 
-	return kResultOk;
+void @SMTG_PLUGIN_CLASS_NAME@Processor::doParameterHandling(Steinberg::Vst::ProcessData& data)
+{
+	int32 numParamsChanged = data.inputParameterChanges->getParameterCount();
+	for (int32 index = 0; index < numParamsChanged; index++)
+	{
+		if (IParamValueQueue* paramQueue = data.inputParameterChanges->getParameterData(index))
+		{
+			ParamValue value;
+			int32 sampleOffset;
+			int32 numPoints = paramQueue->getPointCount();
+			switch (paramQueue->getParameterId())
+			{
+			case kCGainId:
+				if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+					kResultTrue)
+					mGain = value;
+				break;
+			case kBypassId:
+				if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+					kResultTrue)
+				{
+					mBypass = (value > 0.5f);
+				}
+				break;
+			}
+		}
+	}
 }
 
 //------------------------------------------------------------------------
