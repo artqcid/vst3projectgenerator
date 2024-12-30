@@ -2,8 +2,8 @@
 // @SMTG_SOURCE_COPYRIGHT_HEADER@
 //------------------------------------------------------------------------
 
-#include "@SMTG_PREFIX_FOR_FILENAMES@processor.h"
-#include "@SMTG_PREFIX_FOR_FILENAMES@cids.h"
+#include "@SMTG_PREFIX_FOR_FILENAMES@Processor.h"
+#include "@SMTG_PREFIX_FOR_FILENAMES@Cids.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/vst/ivstparameterchanges.h"
@@ -186,7 +186,7 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::getState (IBStream* state)
 }
 
 //------------------------------------------------------------------------
-tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@::setBusArrangements(SpeakerArrangement* inputs, int32 numIns,
+tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::setBusArrangements(SpeakerArrangement* inputs, int32 numIns,
 	SpeakerArrangement* outputs, int32 numOuts)
 {
 	if (numIns == 1 && numOuts == 1)
