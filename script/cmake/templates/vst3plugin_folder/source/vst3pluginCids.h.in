@@ -19,7 +19,7 @@ static const Steinberg::FUID k@SMTG_PLUGIN_CLASS_NAME@ControllerUID (@SMTG_Contr
 /**  and add the IdTag 
 // parameter tags
 enum {
-	kBypassId,
+	kBypassId = 10,
 	kCGainId = 100,
 	kLGainValueId = 101,
 };
