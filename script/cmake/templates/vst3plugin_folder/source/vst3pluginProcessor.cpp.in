@@ -120,7 +120,7 @@ void @SMTG_PLUGIN_CLASS_NAME@Processor::doAudioProcessing(ProcessData& data)
 
 		for (auto sampleIndex = 0; sampleIndex < data.numSamples; ++sampleIndex)
 		{
-			if (mBypass = true) {
+			if (mBypass == true) {
 				outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex];
 			}
 			outChannelBuffer[sampleIndex] = inChannelBuffer[sampleIndex] * mGain;
