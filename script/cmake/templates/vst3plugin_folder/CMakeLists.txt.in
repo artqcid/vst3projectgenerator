@@ -29,6 +29,8 @@ smtg_add_vst3plugin(@SMTG_CMAKE_PROJECT_NAME@
     source/@SMTG_PREFIX_FOR_FILENAMES@Entry.cpp
     source/Sub@SMTG_PREFIX_FOR_FILENAMES@Controller.cpp
     source/Sub@SMTG_PREFIX_FOR_FILENAMES@Controller.h
+    source/@SMTG_PREFIX_FOR_FILENAMES@BusArrangementHandler.cpp
+    source/@SMTG_PREFIX_FOR_FILENAMES@BusArrangementHandler.h
 )
 
 #- VSTGUI Wanted ----
