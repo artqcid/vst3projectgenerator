@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "@SMTG_PREFIX_FOR_FILENAMES@BusArrangementHandler.h"
 #include "public.sdk/source/vst/vstaudioeffect.h"
 
 using namespace Steinberg;
