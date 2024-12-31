@@ -208,11 +208,5 @@ tresult PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::setBusArrangements(Speaker
 }
 
 //------------------------------------------------------------------------
-uint32 PLUGIN_API @SMTG_PLUGIN_CLASS_NAME@Processor::getProcessContextRequirements ()
-{
-    return IProcessContextRequirements::kNeedTempo | IProcessContextRequirements::kNeedTimeSignature;
-}
-
-//------------------------------------------------------------------------
 } // namespace @SMTG_VENDOR_NAMESPACE@
 

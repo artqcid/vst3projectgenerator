@@ -57,9 +57,6 @@ public:
 		SpeakerArrangement* outputs,
 		int32 numOuts) SMTG_OVERRIDE;
 
-	/** Process Context Requirements */
-	uint32 PLUGIN_API getProcessContextRequirements () SMTG_OVERRIDE;
-
 //------------------------------------------------------------------------
 protected:
 	ParamValue mGain;
